@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog — MiniCarCollectionUz | Modellarni Tanlash</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#131c2e',
+                        accentGold: '#f59e0b',
+                        accentRed: '#ef4444',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .car-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .car-card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 25px -10px rgba(245, 158, 11, 0.2);
+        }
+        /* Custom scrollbar for filter drawer */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #131c2e;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f59e0b;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-100 min-h-screen flex flex-col selection:bg-accentGold selection:text-black">
+
+    <!-- Top Notification Bar -->
+    <div class="bg-gradient-to-r from-accentGold to-amber-600 text-black text-xs md:text-sm font-semibold py-2 px-4 text-center">
+        <i class="fa-solid fa-truck-fast mr-2"></i> Barcha buyurtmalar maxsus qutida va xavfsiz yetkaziladi! Telegram: <a href="https://t.me/MiniCarCollectionUz" target="_blank" class="underline font-bold hover:text-white transition">@MiniCarCollectionUz</a>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-darkBg/90 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-accentGold to-amber-500 flex items-center justify-center shadow-lg group-hover:scale-105 transition">
+                    <i class="fa-solid fa-car-side text-black text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-wider text-white">MINICAR<span class="text-accentGold">UZ</span></span>
+                    <span class="block text-[10px] text-gray-400 tracking-widest uppercase">Kolleksion Modellar</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="index.html" class="text-gray-300 hover:text-accentGold transition">Bosh sahifa</a>
+                <a href="catalog.html" class="text-accentGold font-semibold transition">Katalog</a>
+                <a href="product.html" class="text-gray-300 hover:text-accentGold transition">Model namunasi</a>
+                <a href="cart.html" class="text-gray-300 hover:text-accentGold transition flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping"></i> Savatcha
+                    <span id="cart-badge" class="bg-accentGold text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+                </a>
+                <a href="contact.html" class="text-gray-300 hover:text-accentGold transition">Aloqa & Biz haqimizda</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://t.me/MiniCarCollectionUz" target="_blank" class="bg-[#229ED9] hover:bg-[#1e8bc3] text-white px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 shadow-lg transition transform hover:-translate-y-0.5">
+                    <i class="fa-brands fa-telegram text-lg"></i> Kanalga o'tish
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cardBg border-b border-gray-800 px-6 py-5 space-y-4">
+            <a href="index.html" class="block text-gray-300 hover:text-accentGold">Bosh sahifa</a>
+            <a href="catalog.html" class="block text-accentGold font-semibold">Katalog</a>
+            <a href="product.html" class="block text-gray-300 hover:text-accentGold">Model namunasi</a>
+            <a href="cart.html" class="block text-gray-300 hover:text-accentGold">Savatcha</a>
+            <a href="contact.html" class="block text-gray-300 hover:text-accentGold">Aloqa & Biz haqimizda</a>
+            <a href="https://t.me/MiniCarCollectionUz" target="_blank" class="block text-center bg-[#229ED9] text-white py-2.5 rounded-xl font-semibold">Telegram Kanal</a>
+        </div>
+    </header>
+
+    <!-- Page Title / Breadcrumb -->
+    <div class="bg-cardBg/40 border-b border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                <a href="index.html" class="hover:text-accentGold">Bosh sahifa</a>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                <span class="text-accentGold font-medium">Katalog</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white">To'liq Modellari Katalogi</h1>
+            <p class="text-gray-400 text-sm mt-1">O'zingizga maqbul brend, masshtab va narxdagi kolleksion mashinani toping</p>
+        </div>
+    </div>
+
+    <!-- Main Catalog Layout -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
+        <div class="flex flex-col lg:flex-row gap-8">
+
+            <!-- Sidebar Filters (Desktop) -->
+            <aside class="hidden lg:block w-72 flex-shrink-0 space-y-8">
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-6 sticky top-28">
+                    <div class="flex items-center justify-between pb-4 border-b border-gray-800 mb-6">
+                        <h3 class="font-bold text-lg text-white flex items-center gap-2">
+                            <i class="fa-solid fa-filter text-accentGold"></i> Filterlar
+                        </h3>
+                        <button id="reset-filters" class="text-xs text-gray-400 hover:text-accentRed transition">Tozalash</button>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Model Qidirish</label>
+                        <div class="relative">
+                            <input type="text" id="search-input" placeholder="Masalan: Aventador, GT3..." class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-accentGold transition">
+                            <i class="fa-solid fa-magnifying-glass absolute right-3 top-3 text-gray-500 text-sm"></i>
+                        </div>
+                    </div>
+
+                    <!-- Brand Filter -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Brendlar</label>
+                        <div class="space-y-2.5 text-sm">
+                            <label class="flex items-center gap-3 text-gray-300 hover:text-white cursor-pointer">
+                                <input type="checkbox" value="lamborghini" class="brand-checkbox rounded bg-darkBg border-gray-700 text-accentGold focus:ring-0">
+                                <span>Lamborghini</span>
+                                <span class="ml-auto text-xs text-gray-500">(12)</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-gray-300 hover:text-white cursor-pointer">
+                                <input type="checkbox" value="ferrari" class="brand-checkbox rounded bg-darkBg border-gray-700 text-accentGold focus:ring-0">
+                                <span>Ferrari</span>
+                                <span class="ml-auto text-xs text-gray-500">(8)</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-gray-300 hover:text-white cursor-pointer">
+                                <input type="checkbox" value="porsche" class="brand-checkbox rounded bg-darkBg border-gray-700 text-accentGold focus:ring-0">
+                                <span>Porsche</span>
+                                <span class="ml-auto text-xs text-gray-500">(10)</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-gray-300 hover:text-white cursor-pointer">
+                                <input type="checkbox" value="bugatti" class="brand-checkbox rounded bg-darkBg border-gray-700 text-accentGold focus:ring-0">
+                                <span>Bugatti</span>
+                                <span class="ml-auto text-xs text-gray-500">(5)</span>
+                            </label>
+                            <label class="flex items-center gap-3 text-gray-300 hover:text-white cursor-pointer">
+                                <input type="checkbox" value="bmw" class="brand-checkbox rounded bg-darkBg border-gray-700 text-accentGold focus:ring-0">
+                                <span>BMW / Mercedes</span>
+                                <span class="ml-auto text-xs text-gray-500">(14)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Scale Filter -->
+                    <div class="mb-6">
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Masshtab (Scale)</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button class="scale-btn bg-darkBg border border-gray-700 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:border-accentGold transition active" data-scale="all">Barchasi</button>
+                            <button class="scale-btn bg-darkBg border border-gray-700 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:border-accentGold transition" data-scale="1:18">1:18</button>
+                            <button class="scale-btn bg-darkBg border border-gray-700 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:border-accentGold transition" data-scale="1:24">1:24</button>
+                            <button class="scale-btn bg-darkBg border border-gray-700 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:border-accentGold transition" data-scale="1:32">1:32</button>
+                            <button class="scale-btn bg-darkBg border border-gray-700 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:border-accentGold transition" data-scale="1:43">1:43</button>
+                            <button class="scale-btn bg-darkBg border border-gray-700 py-2 rounded-xl text-xs font-semibold text-gray-300 hover:border-accentGold transition" data-scale="1:64">1:64</button>
+                        </div>
+                    </div>
+
+                    <!-- Price Range -->
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2">Maksimal Narx</label>
+                        <input type="range" id="price-range" min="100000" max="1500000" step="50000" value="1500000" class="w-full accent-accentGold cursor-pointer">
+                        <div class="flex justify-between items-center text-xs text-gray-400 mt-2">
+                            <span>100,000 so'm</span>
+                            <span id="price-val" class="font-bold text-accentGold">1,500,000 so'm</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Catalog Content -->
+            <div class="flex-grow space-y-6">
+
+                <!-- Control Bar (Sort & Mobile Filter Trigger) -->
+                <div class="bg-cardBg border border-gray-800 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-sm text-gray-400">
+                        Jami topildi: <span id="product-count" class="font-bold text-white">8 ta model</span>
+                    </div>
+
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <!-- Mobile Filter Button -->
+                        <button id="mobile-filter-btn" class="lg:hidden flex-1 sm:flex-none bg-darkBg border border-gray-700 px-4 py-2.5 rounded-xl text-sm font-semibold text-gray-300 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-filter text-accentGold"></i> Filterlar
+                        </button>
+
+                        <!-- Sort Dropdown -->
+                        <div class="flex-1 sm:flex-none relative">
+                            <select id="sort-select" class="w-full bg-darkBg border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGold cursor-pointer">
+                                <option value="default">Saralash: Ommabopligi</option>
+                                <option value="low-high">Narxi: Arzondan qimmatga</option>
+                                <option value="high-low">Narxi: Qimmatdan arzonga</option>
+                                <option value="newest">Yangi kelganlar</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+
+                    <!-- Card 1 -->
+                    <div class="product-item bg-cardBg rounded-2xl border border-gray-800 overflow-hidden car-card-hover flex flex-col" data-brand="lamborghini" data-scale="1:18" data-price="450000">
+                        <div class="relative h-56 bg-gray-900 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?q=80&w=800&auto=format&fit=crop" alt="Lamborghini Sián" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-accentRed text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Hit Sotuv</span>
+                            <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-accentGold text-xs font-semibold px-2.5 py-1 rounded-lg">1:18 Scale</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <span class="text-xs text-gray-400 uppercase tracking-widest font-medium">Bburago</span>
+                                <h3 class="font-bold text-lg text-white mt-0.5">Lamborghini Sián FKP 37</h3>
+                                <p class="text-xs text-gray-400 mt-2 line-clamp-2">Metall korpus, ochiladigan motor bo'linmasi va eshiklar.</p>
+                            </div>
+                            <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                                <div>
+                                    <span class="text-[11px] text-gray-400 block">Narxi:</span>
+                                    <span class="text-lg font-extrabold text-accentGold">450,000 so'm</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <a href="product.html" class="p-2.5 bg-darkBg border border-gray-700 hover:border-accentGold text-gray-300 rounded-xl transition" title="Batafsil">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="cart.html" class="bg-accentGold hover:bg-amber-500 text-black font-bold px-4 py-2.5 rounded-xl text-sm transition shadow flex items-center gap-2">
+                                        <i class="fa-solid fa-cart-plus"></i> Olish
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="product-item bg-cardBg rounded-2xl border border-gray-800 overflow-hidden car-card-hover flex flex-col" data-brand="ferrari" data-scale="1:24" data-price="320000">
+                        <div class="relative h-56 bg-gray-900 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=800&auto=format&fit=crop" alt="Ferrari LaFerrari" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-accentGold text-black text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Yangi</span>
+                            <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-accentGold text-xs font-semibold px-2.5 py-1 rounded-lg">1:24 Scale</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <span class="text-xs text-gray-400 uppercase tracking-widest font-medium">Maisto</span>
+                                <h3 class="font-bold text-lg text-white mt-0.5">Ferrari LaFerrari Coupe</h3>
+                                <p class="text-xs text-gray-400 mt-2 line-clamp-2">Ajoyib detallash, rezina g'ildiraklar va lyuks qadoqlash.</p>
+                            </div>
+                            <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                                <div>
+                                    <span class="text-[11px] text-gray-400 block">Narxi:</span>
+                                    <span class="text-lg font-extrabold text-accentGold">320,000 so'm</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <a href="product.html" class="p-2.5 bg-darkBg border border-gray-700 hover:border-accentGold text-gray-300 rounded-xl transition" title="Batafsil">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="cart.html" class="bg-accentGold hover:bg-amber-500 text-black font-bold px-4 py-2.5 rounded-xl text-sm transition shadow flex items-center gap-2">
+                                        <i class="fa-solid fa-cart-plus"></i> Olish
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="product-item bg-cardBg rounded-2xl border border-gray-800 overflow-hidden car-card-hover flex flex-col" data-brand="porsche" data-scale="1:18" data-price="580000">
+                        <div class="relative h-56 bg-gray-900 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?q=80&w=800&auto=format&fit=crop" alt="Porsche GT3" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-md uppercase">Top Sifat</span>
+                            <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-accentGold text-xs font-semibold px-2.5 py-1 rounded-lg">1:18 Scale</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <span class="text-xs text-gray-400 uppercase tracking-widest font-medium">Minichamps</span>
+                                <h3 class="font-bold text-lg text-white mt-0.5">Porsche 911 GT3 RS</h3>
+                                <p class="text-xs text-gray-400 mt-2 line-clamp-2">Kolleksionerlar tanlovi. Rul bilan buriluvchi g'ildiraklar.</p>
+                            </div>
+                            <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                                <div>
+                                    <span class="text-[11px] text-gray-400 block">Narxi:</span>
+                                    <span class="text-lg font-extrabold text-accentGold">580,000 so'm</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <a href="product.html" class="p-2.5 bg-darkBg border border-gray-700 hover:border-accentGold text-gray-300 rounded-xl transition" title="Batafsil">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="cart.html" class="bg-accentGold hover:bg-amber-500 text-black font-bold px-4 py-2.5 rounded-xl text-sm transition shadow flex items-center gap-2">
+                                        <i class="fa-solid fa-cart-plus"></i> Olish
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="product-item bg-cardBg rounded-2xl border border-gray-800 overflow-hidden car-card-hover flex flex-col" data-brand="bugatti" data-scale="1:24" data-price="390000">
+                        <div class="relative h-56 bg-gray-900 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?q=80&w=800&auto=format&fit=crop" alt="Bugatti Chiron" class="w-full h-full object-cover">
+                            <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-accentGold text-xs font-semibold px-2.5 py-1 rounded-lg">1:24 Scale</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <span class="text-xs text-gray-400 uppercase tracking-widest font-medium">Rastar</span>
+                                <h3 class="font-bold text-lg text-white mt-0.5">Bugatti Chiron Sport Edition</h3>
+                                <p class="text-xs text-gray-400 mt-2 line-clamp-2">Sport uslubdagi superkar. Metall qoplama va tiniq bo'yoq.</p>
+                            </div>
+                            <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                                <div>
+                                    <span class="text-[11px] text-gray-400 block">Narxi:</span>
+                                    <span class="text-lg font-extrabold text-accentGold">390,000 so'm</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <a href="product.html" class="p-2.5 bg-darkBg border border-gray-700 hover:border-accentGold text-gray-300 rounded-xl transition" title="Batafsil">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="cart.html" class="bg-accentGold hover:bg-amber-500 text-black font-bold px-4 py-2.5 rounded-xl text-sm transition shadow flex items-center gap-2">
+                                        <i class="fa-solid fa-cart-plus"></i> Olish
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="product-item bg-cardBg rounded-2xl border border-gray-800 overflow-hidden car-card-hover flex flex-col" data-brand="bmw" data-scale="1:32" data-price="180000">
+                        <div class="relative h-56 bg-gray-900 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800&auto=format&fit=crop" alt="BMW M5" class="w-full h-full object-cover">
+                            <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-accentGold text-xs font-semibold px-2.5 py-1 rounded-lg">1:32 Scale</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <span class="text-xs text-gray-400 uppercase tracking-widest font-medium">Kinsmart</span>
+                                <h3 class="font-bold text-lg text-white mt-0.5">BMW M5 Competition</h3>
+                                <p class="text-xs text-gray-400 mt-2 line-clamp-2">Ovozli va chiroqli effektlar. Pull-back mexanizmi bilan.</p>
+                            </div>
+                            <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                                <div>
+                                    <span class="text-[11px] text-gray-400 block">Narxi:</span>
+                                    <span class="text-lg font-extrabold text-accentGold">180,000 so'm</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <a href="product.html" class="p-2.5 bg-darkBg border border-gray-700 hover:border-accentGold text-gray-300 rounded-xl transition" title="Batafsil">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="cart.html" class="bg-accentGold hover:bg-amber-500 text-black font-bold px-4 py-2.5 rounded-xl text-sm transition shadow flex items-center gap-2">
+                                        <i class="fa-solid fa-cart-plus"></i> Olish
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="product-item bg-cardBg rounded-2xl border border-gray-800 overflow-hidden car-card-hover flex flex-col" data-brand="lamborghini" data-scale="1:24" data-price="290000">
+                        <div class="relative h-56 bg-gray-900 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=800&auto=format&fit=crop" alt="Lamborghini Huracan" class="w-full h-full object-cover">
+                            <span class="absolute bottom-3 right-3 bg-black/70 backdrop-blur-md text-accentGold text-xs font-semibold px-2.5 py-1 rounded-lg">1:24 Scale</span>
+                        </div>
+                        <div class="p-5 flex flex-col flex-grow justify-between space-y-4">
+                            <div>
+                                <span class="text-xs text-gray-400 uppercase tracking-widest font-medium">Bburago</span>
+                                <h3 class="font-bold text-lg text-white mt-0.5">Lamborghini Huracán EVO</h3>
+                                <p class="text-xs text-gray-400 mt-2 line-clamp-2">Ajoyib yashil rang, sport disklar va aniq saloni.</p>
+                            </div>
+                            <div class="pt-4 border-t border-gray-800 flex items-center justify-between">
+                                <div>
+                                    <span class="text-[11px] text-gray-400 block">Narxi:</span>
+                                    <span class="text-lg font-extrabold text-accentGold">290,000 so'm</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <a href="product.html" class="p-2.5 bg-darkBg border border-gray-700 hover:border-accentGold text-gray-300 rounded-xl transition" title="Batafsil">
+                                        <i class="fa-solid fa-eye"></i>
+                                    </a>
+                                    <a href="cart.html" class="bg-accentGold hover:bg-amber-500 text-black font-bold px-4 py-2.5 rounded-xl text-sm transition shadow flex items-center gap-2">
+                                        <i class="fa-solid fa-cart-plus"></i> Olish
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Pagination Bar -->
+                <div class="flex justify-center items-center gap-2 pt-8">
+                    <button class="w-10 h-10 rounded-xl bg-cardBg border border-gray-800 text-gray-400 flex items-center justify-center hover:border-accentGold hover:text-white transition">
+                        <i class="fa-solid fa-chevron-left text-xs"></i>
+                    </button>
+                    <button class="w-10 h-10 rounded-xl bg-accentGold text-black font-bold flex items-center justify-center shadow">1</button>
+                    <button class="w-10 h-10 rounded-xl bg-cardBg border border-gray-800 text-gray-400 flex items-center justify-center hover:border-accentGold hover:text-white transition">2</button>
+                    <button class="w-10 h-10 rounded-xl bg-cardBg border border-gray-800 text-gray-400 flex items-center justify-center hover:border-accentGold hover:text-white transition">3</button>
+                    <button class="w-10 h-10 rounded-xl bg-cardBg border border-gray-800 text-gray-400 flex items-center justify-center hover:border-accentGold hover:text-white transition">
+                        <i class="fa-solid fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-darkBg border-t border-gray-800 pt-16 pb-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-800">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-accentGold flex items-center justify-center">
+                        <i class="fa-solid fa-car-side text-black text-lg"></i>
+                    </div>
+                    <span class="text-lg font-extrabold tracking-wider text-white">MINICAR<span class="text-accentGold">UZ</span></span>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Sifatli kolleksion mashinalar va aksessuarlarni to'g'ridan-to'g'ri Telegram kanalimiz orqali ham xarid qilishingiz mumkin.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Navigatsiya</h4>
+                <ul class="space-y-2.5 text-sm text-gray-400">
+                    <li><a href="index.html" class="hover:text-accentGold transition">Bosh sahifa</a></li>
+                    <li><a href="catalog.html" class="hover:text-accentGold transition">Katalog</a></li>
+                    <li><a href="product.html" class="hover:text-accentGold transition">Model namunasi</a></li>
+                    <li><a href="cart.html" class="hover:text-accentGold transition">Savatcha</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Masshtablar</h4>
+                <ul class="space-y-2.5 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-accentGold transition">1:18 Premium</a></li>
+                    <li><a href="#" class="hover:text-accentGold transition">1:24 Klassik</a></li>
+                    <li><a href="#" class="hover:text-accentGold transition">1:32 Mini</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Rasmiy Telegram</h4>
+                <a href="https://t.me/MiniCarCollectionUz" target="_blank" class="inline-block bg-[#229ED9] hover:bg-[#1e8bc3] text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition">
+                    <i class="fa-brands fa-telegram mr-2"></i> @MiniCarCollectionUz
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+            <p>&copy; 2026 MiniCarCollectionUz. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive JS Scripts -->
+    <script>
+        // Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // Price Range Slider Display
+        const priceRange = document.getElementById('price-range');
+        const priceVal = document.getElementById('price-val');
+        if(priceRange && priceVal) {
+            priceRange.addEventListener('input', (e) => {
+                priceVal.textContent = parseInt(e.target.value).toLocaleString() + " so'm";
+            });
+        }
+    </script>
+</body>
+</html>

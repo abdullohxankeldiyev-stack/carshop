@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="uz" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aloqa va Biz Haqimizda — MiniCarCollectionUz</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#131c2e',
+                        accentGold: '#f59e0b',
+                        accentRed: '#ef4444',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-darkBg text-gray-100 min-h-screen flex flex-col selection:bg-accentGold selection:text-black">
+
+    <!-- Top Notification Bar -->
+    <div class="bg-gradient-to-r from-accentGold to-amber-600 text-black text-xs md:text-sm font-semibold py-2 px-4 text-center">
+        <i class="fa-solid fa-headset mr-2"></i> Telegram qo'llab-quvvatlash xizmati 24/7 rejimida ishlaydi!
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-darkBg/90 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-accentGold to-amber-500 flex items-center justify-center shadow-lg group-hover:scale-105 transition">
+                    <i class="fa-solid fa-car-side text-black text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-wider text-white">MINICAR<span class="text-accentGold">UZ</span></span>
+                    <span class="block text-[10px] text-gray-400 tracking-widest uppercase">Kolleksion Modellar</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="index.html" class="text-gray-300 hover:text-accentGold transition">Bosh sahifa</a>
+                <a href="catalog.html" class="text-gray-300 hover:text-accentGold transition">Katalog</a>
+                <a href="product.html" class="text-gray-300 hover:text-accentGold transition">Model namunasi</a>
+                <a href="cart.html" class="text-gray-300 hover:text-accentGold transition flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping"></i> Savatcha
+                    <span class="bg-accentGold text-black text-[10px] font-bold px-1.5 py-0.5 rounded-full">2</span>
+                </a>
+                <a href="contact.html" class="text-accentGold font-semibold transition">Aloqa & Biz haqimizda</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://t.me/MiniCarCollectionUz" target="_blank" class="bg-[#229ED9] hover:bg-[#1e8bc3] text-white px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 shadow-lg transition transform hover:-translate-y-0.5">
+                    <i class="fa-brands fa-telegram text-lg"></i> Kanalga o'tish
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-cardBg border-b border-gray-800 px-6 py-5 space-y-4">
+            <a href="index.html" class="block text-gray-300 hover:text-accentGold">Bosh sahifa</a>
+            <a href="catalog.html" class="block text-gray-300 hover:text-accentGold">Katalog</a>
+            <a href="product.html" class="block text-gray-300 hover:text-accentGold">Model namunasi</a>
+            <a href="cart.html" class="block text-gray-300 hover:text-accentGold">Savatcha</a>
+            <a href="contact.html" class="block text-accentGold font-semibold">Aloqa & Biz haqimizda</a>
+            <a href="https://t.me/MiniCarCollectionUz" target="_blank" class="block text-center bg-[#229ED9] text-white py-2.5 rounded-xl font-semibold">Telegram Kanal</a>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <div class="bg-cardBg/30 border-b border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
+            <span class="text-accentGold font-semibold text-xs tracking-widest uppercase">Biz Bilan Bog'laning</span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-white mt-2">MiniCarCollectionUz Jamiyati</h1>
+            <p class="text-gray-400 text-base mt-4 leading-relaxed">
+                Biz O'zbekistondagi kolleksion diecast mashina ishqibozlarini birlashtiramiz. Bizning Telegram kanalimizda eng so'nggi kelgan modellar, eksklyuziv chegirmalar va jonli sharhlar chop etiladi.
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full space-y-16">
+
+        <!-- Cards Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-cardBg border border-gray-800 p-8 rounded-2xl flex flex-col items-center text-center">
+                <div class="w-16 h-16 rounded-2xl bg-[#229ED9]/10 text-[#229ED9] flex items-center justify-center text-3xl mb-6">
+                    <i class="fa-brands fa-telegram"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Rasmiy Telegram Kanal</h3>
+                <p class="text-gray-400 text-sm mb-6 flex-grow">Barcha yangi modellar, real fotosuratlar va video sharhlar kanalimizda.</p>
+                <a href="https://t.me/MiniCarCollectionUz" target="_blank" class="w-full bg-[#229ED9] hover:bg-[#1e8bc3] text-white font-bold py-3 px-4 rounded-xl text-sm transition">
+                    @MiniCarCollectionUz
+                </a>
+            </div>
+
+            <div class="bg-cardBg border border-gray-800 p-8 rounded-2xl flex flex-col items-center text-center">
+                <div class="w-16 h-16 rounded-2xl bg-accentGold/10 text-accentGold flex items-center justify-center text-3xl mb-6">
+                    <i class="fa-solid fa-truck-shield"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Yetkazib Berish</h3>
+                <p class="text-gray-400 text-sm mb-6 flex-grow">Toshkent bo'ylab va O'zbekistonning barcha viloyatlariga ishonchli yetkazamiz.</p>
+                <span class="text-accentGold font-bold text-sm bg-accentGold/10 px-4 py-2 rounded-xl border border-accentGold/20">
+                    Kuryerlik va Pochta xizmati
+                </span>
+            </div>
+
+            <div class="bg-cardBg border border-gray-800 p-8 rounded-2xl flex flex-col items-center text-center">
+                <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-3xl mb-6">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Ish Rejimi</h3>
+                <p class="text-gray-400 text-sm mb-6 flex-grow">Buyurtmalar va murojaatlar Telegram botimiz orqali uzluksiz qabul qilinadi.</p>
+                <span class="text-emerald-400 font-bold text-sm bg-emerald-500/10 px-4 py-2 rounded-xl border border-emerald-500/20">
+                    24/7 Avtomatik qabul
+                </span>
+            </div>
+        </div>
+
+        <!-- Contact Form & Telegram API -->
+        <div class="bg-cardBg border border-gray-800 rounded-3xl p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="text-accentGold font-semibold text-xs tracking-widest uppercase">To'g'ridan-to'g'ri Aloqa</span>
+                <h2 class="text-3xl font-extrabold text-white">Savolingiz yoki Maxsus Buyurtmangiz Bormi?</h2>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Katalogda yo'q ma'lum bir rare (noyob) modelni qidiryapsizmi? Yoki ulgurji xarid qilmoqchimisiz? Formani to'ldiring va xabaringiz to'g'ridan-to'g'ri administrator botimizga yuboriladi.
+                </p>
+                <div class="space-y-4 pt-2">
+                    <div class="flex items-center gap-4 text-sm text-gray-300">
+                        <div class="w-10 h-10 rounded-xl bg-darkBg border border-gray-700 flex items-center justify-center text-accentGold">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <span>Rasmiy Telegram: @MiniCarCollectionUz</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm text-gray-300">
+                        <div class="w-10 h-10 rounded-xl bg-darkBg border border-gray-700 flex items-center justify-center text-accentGold">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <span>O'zbekiston, Toshkent shahri</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form id="contact-form" class="space-y-4 bg-darkBg border border-gray-800 p-6 sm:p-8 rounded-2xl">
+                <h3 class="text-lg font-bold text-white mb-2">Xabar Yo'llash</h3>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Ismingiz</label>
+                    <input type="text" id="contact-name" required placeholder="Ismingizni kiriting..." class="w-full bg-cardBg border border-gray-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-accentGold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Telegram yoki Telefon</label>
+                    <input type="text" id="contact-user" required placeholder="@username yoki +998..." class="w-full bg-cardBg border border-gray-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-accentGold">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-gray-400 mb-1">Xabaringiz / Izoh</label>
+                    <textarea id="contact-msg" required rows="3" placeholder="Qaysi model haqida so'ramoqchisiz?..." class="w-full bg-cardBg border border-gray-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-accentGold resize-none"></textarea>
+                </div>
+                <button type="submit" id="contact-submit" class="w-full bg-accentGold hover:bg-amber-500 text-black font-extrabold py-3.5 px-6 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-paper-plane"></i> Xabarni Yuborish
+                </button>
+                <div id="contact-success" class="hidden bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 p-3 rounded-xl text-center text-xs font-semibold mt-2">
+                    <i class="fa-solid fa-circle-check mr-1"></i> Xabaringiz Telegram adminga muvaffaqiyatli yetkazildi!
+                </div>
+            </form>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="space-y-8">
+            <div class="text-center max-w-2xl mx-auto">
+                <span class="text-accentGold font-semibold text-xs tracking-widest uppercase">Ko'p Beriladigan Savollar</span>
+                <h2 class="text-3xl font-extrabold text-white mt-1">FAQ & Ma'lumotlar</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-cardBg border border-gray-800 p-6 rounded-2xl space-y-2">
+                    <h4 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-circle-question text-accentGold"></i> Mashinalar qanday materialdan tayyorlangan?
+                    </h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Bizdagi barcha modellar Diecast metall korpus va yuqori sifatli ABS plastik birikmasidan tayyorlangan. Eshiklari, kapoti va g'ildiraklari rezina qoplamaga ega.
+                    </p>
+                </div>
+                <div class="bg-cardBg border border-gray-800 p-6 rounded-2xl space-y-2">
+                    <h4 class="font-bold text-white text-base flex items-center gap-2">
+                        <i class="fa-solid fa-circle-question text-accentGold"></i> Yetkazib berish vaqti qancha?
+                    </h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Toshkent shahri bo meksiz 2-6 soat ichida, viloyat markazlariga esa pochta va kuryerlik xizmatlari orqali 1-2 kun ichida xavfsiz yetkaziladi.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-darkBg border-t border-gray-800 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-800">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-accentGold flex items-center justify-center">
+                        <i class="fa-solid fa-car-side text-black text-lg"></i>
+                    </div>
+                    <span class="text-lg font-extrabold tracking-wider text-white">MINICAR<span class="text-accentGold">UZ</span></span>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    MiniCarCollectionUz — sifat va haqiqiy ehtiros mujassamlashgan makon.
+                </p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Navigatsiya</h4>
+                <ul class="space-y-2.5 text-sm text-gray-400">
+                    <li><a href="index.html" class="hover:text-accentGold transition">Bosh sahifa</a></li>
+                    <li><a href="catalog.html" class="hover:text-accentGold transition">Katalog</a></li>
+                    <li><a href="product.html" class="hover:text-accentGold transition">Model namunasi</a></li>
+                    <li><a href="cart.html" class="hover:text-accentGold transition">Savatcha</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Masshtablar</h4>
+                <ul class="space-y-2.5 text-sm text-gray-400">
+                    <li><a href="#" class="hover:text-accentGold transition">1:18 Premium</a></li>
+                    <li><a href="#" class="hover:text-accentGold transition">1:24 Klassik</a></li>
+                    <li><a href="#" class="hover:text-accentGold transition">1:32 Mini</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-white text-sm uppercase tracking-wider mb-4">Rasmiy Telegram</h4>
+                <a href="https://t.me/MiniCarCollectionUz" target="_blank" class="inline-block bg-[#229ED9] hover:bg-[#1e8bc3] text-white font-semibold px-4 py-2.5 rounded-xl text-sm transition">
+                    <i class="fa-brands fa-telegram mr-2"></i> @MiniCarCollectionUz
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 text-center text-xs text-gray-500">
+            <p>&copy; 2026 MiniCarCollectionUz. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>
+
+    <!-- JS Telegram Contact Form -->
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        const BOT_TOKEN = "8725682843:AAEYKV8fuc_HnGHSWifhZeDpH7riSG48Gxs";
+        const ADMIN_CHAT_ID = "8325706679";
+
+        const contactForm = document.getElementById('contact-form');
+        const contactSubmit = document.getElementById('contact-submit');
+        const contactSuccess = document.getElementById('contact-success');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value.trim();
+            const user = document.getElementById('contact-user').value.trim();
+            const msg = document.getElementById('contact-msg').value.trim();
+
+            const text = `💬 **YANGI MUROJAAT / SAVOL!** (%23MiniCarContact)\n\n` +
+                         `👤 **Ismi:** ${encodeURIComponent(name)}\n` +
+                         `📱 **Aloqa:** ${encodeURIComponent(user)}\n` +
+                         `📝 **Xabar:** ${encodeURIComponent(msg)}`;
+
+            contactSubmit.disabled = true;
+            contactSubmit.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Yuborilmoqda...`;
+
+            try {
+                const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${ADMIN_CHAT_ID}&text=${text}&parse_mode=Markdown`);
+                const data = await res.json();
+
+                if (data.ok) {
+                    contactForm.reset();
+                    contactSuccess.classList.remove('hidden');
+                    contactSubmit.innerHTML = `<i class="fa-solid fa-check"></i> Yuborildi`;
+                } else {
+                    alert("Xatolik: " + data.description);
+                    contactSubmit.disabled = false;
+                    contactSubmit.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Xabarni Yuborish`;
+                }
+            } catch (err) {
+                alert("Tarmoq xatoligi!");
+                contactSubmit.disabled = false;
+                contactSubmit.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Xabarni Yuborish`;
+            }
+        });
+    </script>
+</body>
+</html>
